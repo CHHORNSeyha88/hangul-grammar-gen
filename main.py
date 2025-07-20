@@ -1,0 +1,89 @@
+from fpdf import FPDF
+import os
+import webbrowser
+
+# Setup PDF
+pdf = FPDF()
+pdf.add_page()
+
+# Add Korean font
+pdf.add_font("NotoSansKR", "", "NotoSansKR-Regular.ttf")
+pdf.set_font("NotoSansKR", size=12)
+
+# Title
+pdf.cell(0, 10, "Korean Grammar Guide", new_x="LMARGIN", new_y="NEXT")
+
+# Sample grammar list
+grammar_data = [
+    ("이에요 / 예요", "To be (polite)"),
+    ("은 / 는", "Topic marker"),
+    ("이 / 가", "Subject marker"),
+    ("을 / 를", "Object marker"),
+    ("에", "Time/place marker"),
+    ("에서", "Action place marker"),
+    ("있어요 / 없어요", "To have / not have"),
+    ("이거 / 그거 / 저거", "This / that / that over there"),
+    ("~아요 / ~어요", "Present tense polite"),
+    ("~았어요 / ~었어요", "Past tense polite"),
+    ("~ㄹ/을 거예요", "Future tense"),
+    ("하고 / 와 / 과", "And (nouns)"),
+    ("같이", "Together"),
+    ("도", "Also"),
+    ("만", "Only"),
+    ("으로 / 로", "Direction / method"),
+    ("지 않아요 / 안 ~", "Negatives"),
+    ("고", "And (verbs)"),
+    ("부터 / 까지", "From / to"),
+    ("~(으)세요", "Please (polite)"),
+    ("~고 있어요", "Doing something (present progressive)"),
+    ("~고 싶어요", "Want to do"),
+    ("~ㄹ 수 있어요", "Can do"),
+    ("~지 마세요", "Please don’t"),
+    ("~아/어 보세요", "Try doing"),
+    ("~아/어 주세요", "Please do for me"),
+    ("~아/어야 해요", "Must / have to"),
+    ("~ㄹ까요?", "Shall we?"),
+    ("~ㄹ게요", "I will (promise)"),
+    ("~지만", "But"),
+    ("~서 / ~기 때문에", "Because"),
+    ("~보다", "Than"),
+    ("~ㄴ/은/는 것 같아요", "I think..."),
+    ("~(으)면서", "While doing"),
+    ("~(으)ㄴ 후에 / ~고 나서", "After doing"),
+    ("~기 전에", "Before doing"),
+    ("~거나", "Or"),
+    ("~(으)러 가요", "Go to do something"),
+    ("~게 되다", "End up doing"),
+    ("~는 중이에요", "In the middle of"),
+    ("~지요? / ~죠?", "Right?"),
+    ("~는데 / ~은데", "Contrast / background"),
+    ("~(으)니까", "Since / because"),
+    ("~(으)ㄹ 때", "When..."),
+    ("~(으)려고 해요", "Plan to"),
+    ("~(으)면", "If"),
+    ("~(으)ㄹ 수밖에 없다", "No choice but to"),
+    ("~아/어도 돼요", "May I / It’s okay to"),
+    ("~지 않아도 돼요", "Don’t have to"),
+    ("~는 게 어때요?", "How about doing?"),
+    ("~던 / ~던데요", "Past experience (contrast)"),
+    ("~네요", "Wow / surprise"),
+    ("~군요", "Realization"),
+    ("~자마자", "As soon as"),
+]
+
+# Add grammar list
+for grammar, meaning in grammar_data:
+    pdf.cell(0, 10, f"{grammar} → {meaning}", new_x="LMARGIN", new_y="NEXT")
+
+# Output file
+output_path = os.path.join(os.path.dirname(__file__), "Korean_Grammar_Guide.pdf")
+
+# Delete old file if exists
+if os.path.exists(output_path):
+    os.remove(output_path)
+
+# Save and open
+pdf.output(output_path)
+webbrowser.open(f'file://{output_path}')
+
+print(f"PDF created and opened: {output_path}")
