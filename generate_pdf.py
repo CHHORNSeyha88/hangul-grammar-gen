@@ -27,4 +27,4 @@ if os.path.exists(output_path):
 pdf.output(output_path)
 webbrowser.open(f'file://{output_path}')
 
-print("✅ PDF created and opened:", output_path)
+print("[OK] PDF created and opened:", output_path)
